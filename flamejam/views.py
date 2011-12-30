@@ -726,6 +726,9 @@ def statistics():
 
     best_entries = Entry.query.all()
     best_entries.sort(cmp = entryCompare)
+    for entry in best_entries:
+        if entry.jam.rating_end > datetime.today():
+            best_entries.remove(entry)
     stats["best_entries"] = best_entries[:3]
 
     participant_most_entries = Participant.query.all()
